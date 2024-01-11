@@ -2,12 +2,22 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Form, Button, Row, Col, Container } from "react-bootstrap";
 import { CustomInputs } from "../../components/custom-inputs/CustomInputs";
+import { postNewAdmin } from "../../helper/axiosHelper";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+
+const initialFormState = {
+  fname: "",
+  lname: "",
+  phone: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 const AdminSignup = () => {
   const { user } = useSelector((state) => state.userInfo);
-  console.log(user);
-
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState(initialFormState);
 
   const inputs = [
     {
@@ -15,6 +25,7 @@ const AdminSignup = () => {
       name: "fname",
       placeholder: "Enter first name",
       type: "text",
+      value: form.fname,
       required: true,
     },
     {
@@ -22,6 +33,7 @@ const AdminSignup = () => {
       name: "lname",
       placeholder: "Enter last name",
       type: "text",
+      value: form.lname,
       required: true,
     },
     {
@@ -29,12 +41,14 @@ const AdminSignup = () => {
       name: "phone",
       placeholder: "Enter phone number",
       type: "number",
+      value: form.phone,
     },
     {
       label: "Email",
       name: "email",
       placeholder: "Enter email",
       type: "email",
+      value: form.email,
       required: true,
     },
     {
@@ -42,6 +56,7 @@ const AdminSignup = () => {
       name: "password",
       placeholder: "Enter password",
       type: "password",
+      value: form.password,
       required: true,
     },
     {
@@ -49,6 +64,7 @@ const AdminSignup = () => {
       name: "confirmPassword",
       placeholder: "Re-enter password",
       type: "password",
+      value: form.confirmPassword,
       required: true,
     },
   ];
@@ -63,15 +79,10 @@ const AdminSignup = () => {
     });
   };
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("first");
-    console.log(form);
-
     const { confirmPassword, ...rest } = form;
-    console.log(confirmPassword);
-    console.log(rest.password);
 
     // check password
     // if password do not match, alert user.
@@ -81,8 +92,29 @@ const AdminSignup = () => {
       );
     }
 
-    // if password match
-    // create user (admin) in db
+    // if password match, create user (admin) in db
+    const pending = postNewAdmin(rest);
+
+    toast.promise(pending, {
+      pending: "Please wait...",
+    });
+
+    const { status, message } = await pending;
+
+    toast[status](message, {
+      position: "top-left",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+
+    if (status === "success") {
+      setForm(initialFormState);
+    }
   };
 
   // if the user is not admin
@@ -96,9 +128,9 @@ const AdminSignup = () => {
       <div className="bg-image"></div>
 
       <Container fluid className="main-container">
-        <Row className="d-flex justify-content-center align-items-center gap-3 custom-row">
+        <Row className="d-flex justify-content-center custom-row">
           <Col md={true}>
-            <p className="rounded shadow-lg p-3 text-center">
+            <p className="rounded shadow-lg p-3 text-center text-dark custom-signup-heading">
               Welcome to our Library Management System!
               <br />
               Empowering you to seamlessly organize, access, and explore a world
@@ -106,8 +138,11 @@ const AdminSignup = () => {
             </p>
           </Col>
           <Col md={true}>
-            <Form className="rounded shadow-lg p-3" onSubmit={handleOnSubmit}>
-              <h2>Create new admin!</h2>
+            <Form
+              className="rounded shadow-lg p-3 text-dark custom-signup-form"
+              onSubmit={handleOnSubmit}
+            >
+              <h2>New here? Please create your new admin account!</h2>
               <hr />
 
               {inputs.map((item, i) => (
@@ -120,6 +155,15 @@ const AdminSignup = () => {
                 </Button>
               </div>
             </Form>
+
+            <div className="rounded shadow-lg p-2 text-end text-dark custom-login-btn">
+              Already a member? Please login{" "}
+              <Link to="/login">
+                <Button variant="warning" type="submit">
+                  Login
+                </Button>
+              </Link>
+            </div>
           </Col>
         </Row>
       </Container>

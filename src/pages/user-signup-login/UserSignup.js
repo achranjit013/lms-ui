@@ -1,7 +1,8 @@
 import React from "react";
+import MainLayout from "../../components/layouts/MainLayout";
 
 const UserSignup = () => {
-  return <div>UserSignup</div>;
+  return <MainLayout>UserSignup</MainLayout>;
 };
 
 export default UserSignup;

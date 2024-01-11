@@ -1,12 +1,14 @@
+/* admin page bg image */
 .bg-image {
   height: 100vh;
-  background-image: url(../src/assets/lib-bg.jpeg);
+  background-image: url(../src/assets/admin-bg.png);
   filter: blur(6px);
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
 }
 
+/* admin page main container */
 .main-container {
   position: absolute;
   top: 50%;
@@ -20,4 +22,45 @@
 
 .custom-row {
   height: 100vh;
+  gap: 1rem;
+  padding-top: 5rem;
+}
+
+.custom-signup-heading,
+.custom-signup-form {
+  font-size: 18px;
+}
+
+.custom-login-btn {
+  font-size: 18px;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .custom-row {
+    gap: 0;
+    padding-top: 1rem;
+  }
+
+  .custom-signup-heading,
+  .custom-signup-form,
+  .custom-login-btn {
+    font-size: 14px;
+  }
+}
+
+.custom-nav {
+  height: 6rem;
+}
+
+.header-image {
+  border-radius: 100%;
+}
+
+.custom-main {
+  height: calc(100vh - 15rem);
+}
+
+.custom-footer {
+  height: 8rem;
 }

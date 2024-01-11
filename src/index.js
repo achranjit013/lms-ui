@@ -9,6 +9,8 @@ import store from "./store";
 
 // bootstrap css
 import "bootstrap/dist/css/bootstrap.min.css";
+// react-toastify css
+import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
