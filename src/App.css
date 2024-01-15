@@ -36,19 +36,6 @@
   margin-top: 1rem;
 }
 
-@media (max-width: 768px) {
-  .custom-row {
-    gap: 0;
-    padding-top: 1rem;
-  }
-
-  .custom-signup-heading,
-  .custom-signup-form,
-  .custom-login-btn {
-    font-size: 14px;
-  }
-}
-
 .custom-nav {
   height: 6rem;
 }
@@ -63,4 +50,30 @@
 
 .custom-footer {
   height: 8rem;
+}
+
+.custom-user-layout {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+}
+
+.custom-hr {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 768px) {
+  .custom-row {
+    gap: 0;
+    padding-top: 1rem;
+  }
+
+  .custom-signup-heading,
+  .custom-signup-form,
+  .custom-login-btn {
+    font-size: 14px;
+  }
+
+  .custom-user-layout {
+    grid-template-columns: 1fr;
+  }
 }

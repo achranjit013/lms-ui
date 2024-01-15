@@ -71,7 +71,6 @@ const AdminSignup = () => {
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
 
     setForm({
       ...form,

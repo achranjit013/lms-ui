@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { BiSolidLogIn } from "react-icons/bi";
 import { SiGnuprivacyguard } from "react-icons/si";
+import Sidebar from "./Sidebar";
 
 function Header() {
   return (
@@ -56,6 +57,11 @@ function Header() {
                   <SiGnuprivacyguard /> Signup
                 </Link>
               </Nav>
+
+              {/* Sidebar */}
+              <div className="d-md-none">
+                <Sidebar />
+              </div>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>
