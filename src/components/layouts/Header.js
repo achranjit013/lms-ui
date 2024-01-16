@@ -9,8 +9,13 @@ import { FaHome } from "react-icons/fa";
 import { BiSolidLogIn } from "react-icons/bi";
 import { SiGnuprivacyguard } from "react-icons/si";
 import Sidebar from "./Sidebar";
+import { useDispatch, useSelector } from "react-redux";
+// import { logoutUserAction } from "../../pages/user-signup-login/userAction";
 
 function Header() {
+  const { user } = useSelector((state) => state.userInfo);
+  // const dispatch = useDispatch();
+
   return (
     <>
       <Navbar key="md" expand="md" className="bg-body-tertiary mb-3 custom-nav">
@@ -44,24 +49,42 @@ function Header() {
                 >
                   <FaHome /> Home
                 </Link>
-                <Link
-                  className="nav-link d-flex justify-content-center align-items-center gap-1"
-                  to="/login"
-                >
-                  <BiSolidLogIn /> Login
-                </Link>
-                <Link
-                  className="nav-link d-flex justify-content-center align-items-center gap-1"
-                  to="/Signup"
-                >
-                  <SiGnuprivacyguard /> Signup
-                </Link>
+
+                {user?._id ? (
+                  <Link
+                    className="nav-link d-flex justify-content-center align-items-center gap-1"
+                    to="/"
+                    // onClick={() => dispatch(logoutUserAction(user?.email))}
+                  >
+                    <BiSolidLogIn /> Logout
+                  </Link>
+                ) : (
+                  <>
+                    <Link
+                      className="nav-link d-flex justify-content-center align-items-center gap-1"
+                      to="/login"
+                    >
+                      <BiSolidLogIn /> Login
+                    </Link>
+                    <Link
+                      className="nav-link d-flex justify-content-center align-items-center gap-1"
+                      to="/signup"
+                    >
+                      <SiGnuprivacyguard /> Signup
+                    </Link>
+                  </>
+                )}
               </Nav>
 
               {/* Sidebar */}
               <div className="d-md-none">
                 <Sidebar />
               </div>
+              {/* {user?._id && (
+                <div className="d-md-none">
+                  <Sidebar />
+                </div>
+              )} */}
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>

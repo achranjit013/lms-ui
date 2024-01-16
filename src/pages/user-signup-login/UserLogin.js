@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MainLayout from "../../components/layouts/MainLayout";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Button, Col, Form, Row } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import { CustomInputs } from "../../components/custom-inputs/CustomInputs";
 import { toast } from "react-toastify";
 import { loginUser } from "../../helper/axiosHelper";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserAction } from "./userAction";
 
 const UserLogin = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.userInfo);
+  console.log(user);
 
   const [form, setForm] = useState({});
 
@@ -29,6 +33,12 @@ const UserLogin = () => {
       required: true,
     },
   ];
+
+  useEffect(() => {
+    console.log(user?._id);
+    console.log("i am in use effect");
+    user?._id && navigate("/dashboard");
+  }, [user?._id, navigate]);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -53,7 +63,8 @@ const UserLogin = () => {
     // login user
     const { status, message, jwts } = await loginUser({ email, password });
 
-    console.log(status);
+    console.log("helooooooo");
+    console.log(status, message, jwts);
 
     // if login successfull
     if (status === "success") {
@@ -65,7 +76,6 @@ const UserLogin = () => {
 
       //fetch user info and redirect to dashboard
       dispatch(getUserAction());
-      console.log("login success");
       return;
     }
 

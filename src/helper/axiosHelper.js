@@ -52,3 +52,12 @@ export const getUser = () => {
     isPrivate: true,
   });
 };
+
+// logout user
+// export const logoutUser = (data) => {
+//   return axiosProcessor({
+//     method: "post",
+//     url: userEP + "/logout",
+//     data,
+//   });
+// };

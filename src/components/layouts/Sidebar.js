@@ -31,50 +31,48 @@ const Sidebar = () => {
             <MdDashboard />
             Dashboard
           </Link>
-
-          {user?.role === "admin" && (
-            <>
-              <Link
-                className="nav-link d-flex align-items-center gap-1"
-                to="/books"
-              >
-                <MdLibraryBooks />
-                Books
-              </Link>
-              <Link
-                className="nav-link d-flex align-items-center gap-1"
-                to="reviews"
-              >
-                <MdReviews />
-                Reviews
-              </Link>
-              <Link
-                className="nav-link d-flex align-items-center gap-1"
-                to="students"
-              >
-                <PiStudentBold />
-                Students
-              </Link>
-            </>
-          )}
-
+          {/* {user?.role === "admin" && ( */}
+          <>
+            <Link
+              className="nav-link d-flex align-items-center gap-1"
+              to="/books"
+            >
+              <MdLibraryBooks />
+              Books
+            </Link>
+            <Link
+              className="nav-link d-flex align-items-center gap-1"
+              to="/reviews"
+            >
+              <MdReviews />
+              Reviews
+            </Link>
+            <Link
+              className="nav-link d-flex align-items-center gap-1"
+              to="/students"
+            >
+              <PiStudentBold />
+              Students
+            </Link>
+          </>
+          {/* // )} */}
           <Link
             className="nav-link d-flex align-items-center gap-1"
-            to="burrow-history"
+            to="/burrow-history"
           >
             <MdWorkHistory />
             Burrow History
           </Link>
           <Link
             className="nav-link d-flex align-items-center gap-1"
-            to="my-books"
+            to="/my-books"
           >
             <MdOutlineLibraryBooks />
             My Books
           </Link>
           <Link
             className="nav-link d-flex align-items-center gap-1"
-            to="profile"
+            to="/profile"
           >
             <ImProfile />
             Profile
